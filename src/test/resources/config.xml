@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+
+    <jdbc:embedded-database id="dataSource2" type="H2">
+        <jdbc:script location="classpath:schema.sql"/>
+    </jdbc:embedded-database>
+
+
+    <bean id="H2Template" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="DataSource" name="dataSource"/>
+    </bean>
+
+    <bean id="DataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:testdb;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="sa"/>
+
+    </bean>
+
+</beans>
